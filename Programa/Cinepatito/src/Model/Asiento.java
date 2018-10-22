@@ -9,7 +9,7 @@ package Model;
  *
  * @author erofa
  */
-class Asiento {
+public class Asiento {
 
     private int id;
     private boolean disponible;
