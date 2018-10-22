@@ -48,7 +48,21 @@ public class VistaAsientos extends javax.swing.JFrame {
                             listaSeleccionadosFisicos.add(BUTACA[i][j]);
                             listaSeleccionadosLogicos.add(listaAsientos.get(n));
                         } else {
-                            JOptionPane.showMessageDialog(null, "No disponible");
+                            int seleccion = JOptionPane.showOptionDialog(
+                                    null,
+                                    "Seleccione opcion",
+                                    "Selector de opciones",
+                                    JOptionPane.YES_NO_CANCEL_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null, // null para icono por defecto.
+                                    new Object[]{"Aceptar", "Cancelar asiento"}, // null para YES, NO y CANCEL
+                                    "Aceptar");
+
+                            if (seleccion == 1) {
+                                System.out.println("Cancelar");
+                                establecerImagenInicial(BUTACA[i][j]);
+                                listaAsientos.get(n).setDisponible(true);
+                            }
                         }
                     }
                     n++;
