@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Model.Asiento;
@@ -30,6 +25,8 @@ public class VistaAsientos extends javax.swing.JFrame {
     int COLUMNAS = 25;
     JButton[][] BUTACA;
     ArrayList<Asiento> listaAsientos = new ArrayList();
+    ArrayList<Asiento> listaSeleccionadosLogicos = new ArrayList();
+    ArrayList<JButton> listaSeleccionadosFisicos = new ArrayList();
 
     //Clase que escucha si algun botón es presionado
     public class Boton implements ActionListener {
@@ -37,8 +34,6 @@ public class VistaAsientos extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent ae) {
             int n = 0;
-            ArrayList listaSeleccionadosLogicos = new ArrayList();
-            ArrayList listaSeleccionadosFisicos = new ArrayList();
 
             //Aqui escucha todos los botones de asientos
             for (int i = 0; i < FILAS; i++) {
@@ -52,11 +47,9 @@ public class VistaAsientos extends javax.swing.JFrame {
                             establecerImagenSeleccion(BUTACA[i][j]);
                             listaSeleccionadosFisicos.add(BUTACA[i][j]);
                             listaSeleccionadosLogicos.add(listaAsientos.get(n));
-                            System.out.println("FISICO: " + BUTACA[i][j]);
                         } else {
                             JOptionPane.showMessageDialog(null, "No disponible");
                         }
-
                     }
                     n++;
                 }
@@ -64,30 +57,27 @@ public class VistaAsientos extends javax.swing.JFrame {
 
             //Cuando se da a aceptar se toman todos los asientos seleccionados y se marcan como ocupados
             if (getAceptar() == ae.getSource()) {
-                System.out.println("Hey");
 
                 //Se establecen los asientos fisicos seleccionados como ocupados
-//                for (Object selectFis : listaSeleccionadosFisicos) {
-//                    System.out.println("Seleccionado: " + selectFis);
-//                    for (int i = 0; i < FILAS; i++) {
-//                        for (int j = 0; j < COLUMNAS; j++) {
-//                            if (BUTACA[i][j] == selectFis) {
-//                                establecerImagenOcupado(BUTACA[i][j]);
-//                            }
-//                        }
-//                    }
-//                }
+                for (Object selectFis : listaSeleccionadosFisicos) {
+                    for (int i = 0; i < FILAS; i++) {
+                        for (int j = 0; j < COLUMNAS; j++) {
+                            if (BUTACA[i][j] == selectFis) {
+                                establecerImagenOcupado(BUTACA[i][j]);
+                            }
+                        }
+                    }
+                }
 
                 //Se establecen los asientos logicos seleccionados como ocupados
-//                for (Asiento asiento : listaAsientos) {
-//                    for (int i = 0; i < listaSeleccionadosLogicos.size(); i++) {
-//                        if (asiento == listaSeleccionadosLogicos.get(i)) {
-//                            asiento.setDisponible(false);
-//                            System.out.println("kkck");
-//                        }
-//
-//                    }
-//                }
+                for (Asiento asiento : listaAsientos) {
+                    for (int i = 0; i < listaSeleccionadosLogicos.size(); i++) {
+                        if (asiento == listaSeleccionadosLogicos.get(i)) {
+                            asiento.setDisponible(false);
+                        }
+
+                    }
+                }
 
             }
 
@@ -149,7 +139,6 @@ public class VistaAsientos extends javax.swing.JFrame {
         }
 
         agregarActionListeners(BUTACA);
-//        System.out.println(listaAsientos);
 
     }
 
