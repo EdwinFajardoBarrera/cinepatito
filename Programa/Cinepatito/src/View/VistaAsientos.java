@@ -32,7 +32,8 @@ public class VistaAsientos extends javax.swing.JFrame implements ActionListener 
     JButton[][] BUTACA;
     VistaInicio vistaInicio;
     Funcion funcion = vistaInicio.funcionSelected;
-   Asiento asientos[][] = funcion.getAsientos();
+    Asiento asientos[][] = funcion.getAsientos();
+
     public VistaAsientos() throws IOException {
         initComponents();
         setMatriz();
@@ -56,12 +57,12 @@ public class VistaAsientos extends javax.swing.JFrame implements ActionListener 
             for (int j = 0; j < COLUMNAS; j++) {
                 
                 BUTACA[i][j] = new JButton();
-                if ((asientos[i][j].isDisponible())==true) {
+                if ((asientos[i][j].isDisponible()) == true) {
                 establecerImagenInicial(BUTACA[i][j]);
                 BUTACA[i][j].setBounds(y, x, 40, 40);
                 BUTACA[i][j].setBackground(Color.WHITE);
                 butaca.add(BUTACA[i][j]);
-                }else{
+                } else {
                 establecerImagenOcupado(BUTACA[i][j]);
                 BUTACA[i][j].setBounds(y, x, 40, 40);
                 BUTACA[i][j].setBackground(Color.WHITE);
@@ -129,7 +130,7 @@ public class VistaAsientos extends javax.swing.JFrame implements ActionListener 
   public void actionPerformed(ActionEvent e){
       for(int i = 0; i<FILAS; i++){
           for(int j=0; j<COLUMNAS; j++){
-              if(e.getSource()==BUTACA[i][j]){
+              if (e.getSource() == BUTACA[i][j]) {
                   try {
                       cambiarEstadoAsiento();
                   } catch (IOException ex) {

@@ -210,7 +210,7 @@ public class vistaCrearFuncion extends javax.swing.JFrame {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 25; j++) {
                 
-                asientos[i][j]= new Asiento(i+j,true);
+                asientos[i][j] = new Asiento(i + j, false);
             }
             
         }
