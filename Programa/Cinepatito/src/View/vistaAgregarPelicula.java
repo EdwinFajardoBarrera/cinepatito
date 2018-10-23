@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class vistaAgregarPelicula extends javax.swing.JFrame {
 static ArrayList<String> ArrayPels= new ArrayList<String>();
+static ArrayList<Pelicula> ArrayPeliculas= new ArrayList<Pelicula>();
     /**
      * Creates new form vistaAgregarPelicula
      */
@@ -129,7 +131,10 @@ static ArrayList<String> ArrayPels= new ArrayList<String>();
         System.out.println(pel.getNombre());
          pel.setDuracion(jTextFieldDuracion.getText());
          System.out.println(pel.getDuracion());
+         ArrayPeliculas.add(pel);
          ArrayPels.add(pel.getNombre());
+         
+         JOptionPane.showMessageDialog(this, "Se ha agregado la pelicula correctamente");
     }//GEN-LAST:event_jButtonAgregarPeliActionPerformed
 
     

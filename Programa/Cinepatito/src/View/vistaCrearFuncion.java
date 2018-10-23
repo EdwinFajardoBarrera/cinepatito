@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Asiento;
 import Model.Funcion;
 import Model.Pelicula;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -20,17 +22,18 @@ import javax.swing.JTextField;
  * @author Esthefany
  */
 public class vistaCrearFuncion extends javax.swing.JFrame {
-    vistaAgregarPelicula vstpel= new vistaAgregarPelicula();
+    vistaAgregarPelicula vstpel= new vistaAgregarPelicula(); 
+    vistaCrearFuncion vistaFuncion;
     public Funcion funcion;
     static ArrayList<String[]> listaFunciones = new ArrayList<String[]>();
-    
+    static ArrayList<Funcion> ArrayFunciones = new ArrayList<Funcion>();
     /**
      * Creates new form vistaCrearFuncion
      */
     public vistaCrearFuncion() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-       DefaultComboBoxModel dm = new DefaultComboBoxModel(vistaAgregarPelicula.ArrayPels.toArray());
+       DefaultComboBoxModel dm = new DefaultComboBoxModel(vistaAgregarPelicula.ArrayPeliculas.toArray());
        jComboBox1.setModel(dm);
      
       
@@ -196,20 +199,31 @@ public class vistaCrearFuncion extends javax.swing.JFrame {
 
     private void jButtonAbrirFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirFuncionActionPerformed
         funcion= new Funcion();
-        String funciones[]= new String[4];
+//        String funciones[]= new String[4];
         funcion.setIdFuncion(Integer.parseInt(jTextFieldIdFuncion.getText()));
         funcion.setHora(jTextFieldHora.getText());
         funcion.setSala(jComboBoxSala.getSelectedIndex()+1);
-        funciones[0] = jTextFieldIdFuncion.getText();
-        funciones[1]= jTextFieldHora.getText();
-        funciones[2]= String.valueOf(jComboBoxSala.getSelectedIndex()+1);
-        funciones[3]= jComboBox1.getSelectedItem().toString();
-        
-        System.out.println(funciones[0]+funciones[1]+funciones[2]+funciones[3]);
-        
-        
-        listaFunciones.add(funciones);
+        funcion.setPeli(vistaAgregarPelicula.ArrayPeliculas.get(jComboBox1.getSelectedIndex()));
+        funcion.setAbierta(true);
+        Asiento asientos[][]= new Asiento[15][25];
+       
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 25; j++) {
+                
+                asientos[i][j]= new Asiento(i+j,true);
+            }
+            
+        }
+        funcion.setAsientos(asientos);
 
+//        funciones[0] = jTextFieldIdFuncion.getText();
+//        funciones[1]= jTextFieldHora.getText();
+//        funciones[2]= String.valueOf(jComboBoxSala.getSelectedIndex()+1);
+//        funciones[3]= jComboBox1.getSelectedItem().toString();
+        
+        
+        ArrayFunciones.add(funcion);
+        JOptionPane.showMessageDialog(this,"Se ha agregado la funcion correctamente");
     }//GEN-LAST:event_jButtonAbrirFuncionActionPerformed
 
     private void jComboBoxSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSalaActionPerformed

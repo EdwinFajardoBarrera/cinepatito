@@ -12,11 +12,11 @@ package Model;
  */
 public class Asiento {
     private int idAsiento;
-    private boolean disponibildad;
+    private boolean disponible;
 
     public Asiento(int idAsiento, boolean disponibildad) {
         this.idAsiento = idAsiento;
-        this.disponibildad = disponibildad;
+        this.disponible = disponibildad;
     }
 
     public int getIdAsiento() {
@@ -27,12 +27,12 @@ public class Asiento {
         this.idAsiento = idAsiento;
     }
 
-    public boolean isDisponibildad() {
-        return disponibildad;
+    public boolean isDisponible() {
+        return disponible;
     }
 
     public void setDisponibildad(boolean disponibildad) {
-        this.disponibildad = disponibildad;
+        this.disponible = disponibildad;
     }
     
 }
