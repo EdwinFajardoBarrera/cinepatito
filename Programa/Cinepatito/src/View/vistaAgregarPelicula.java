@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package View;
 
-import Modelo.Pelicula;
+import Model.Pelicula;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

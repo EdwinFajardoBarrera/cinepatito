@@ -1,7 +1,7 @@
-package Modelo;
+package Model;
 
 
-import Modelo.Asiento;
+import Model.Asiento;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

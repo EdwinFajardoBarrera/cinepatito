@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package View;
 
-import Modelo.Funcion;
-import Modelo.Pelicula;
+import Model.Funcion;
+import Model.Pelicula;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
