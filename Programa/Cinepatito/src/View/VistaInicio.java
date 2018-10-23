@@ -5,89 +5,21 @@
  */
 package Vista;
 
-import Modelo.Asiento;
-import Modelo.Funcion;
 import Modelo.Pelicula;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Esthefany
  */
 public class VistaInicio extends javax.swing.JFrame {
-    static VistaAgregarPelicula vistapeli; 
-    static VistaCrearFuncion vistaFuncion;
-    DefaultTableModel modelo;
 
     /**
      * Creates new form VistaInicio
      */
-    public VistaInicio() throws IOException {
+    public VistaInicio() {
         initComponents();
-        cargar();
     }
-    public void cargar() throws IOException{
-        String [] titulos = {"No.De Pelicula","Pelicula","Idioma","Duracion"};
-        String[] datos;
-        int contador;
-        modelo = new  DefaultTableModel(null,titulos);
-        
-        
-        ArrayList<String[]> funcion = leer();
-        contador=funcion.size();
-        System.out.println(contador);
-        datos= new String[4];
-        System.out.println(titulos.length);
-        for(int i=0;i<contador;i++){
-            datos[0]=funcion.get(i)[0];
-            datos[1]=funcion.get(i)[1];
-            datos[2]=funcion.get(i)[2];
-            datos[3]=funcion.get(i)[4];
-            
-            modelo.addRow(datos);
-        }
-        jTablePeliculas.setModel(modelo);
-    }
-    
-    public ArrayList<String[]> leer() throws FileNotFoundException, IOException {
-        ArrayList<String[]> funciones = new ArrayList();
-        BufferedReader br = null;
-        String line = "";
-//Se define separador ","
-        String cvsSplitBy = ",";
-        try {
-            br = new BufferedReader(new FileReader("Funciones.csv"));
-            while ((line = br.readLine()) != null) {
-                String[] datos = line.split(cvsSplitBy);
-                funciones.add(datos);
-            }
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return funciones;
 
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,23 +30,23 @@ public class VistaInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButtonAgregarFuncion = new javax.swing.JButton();
+        AgFuncionBoton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTablePeliculas = new javax.swing.JTable();
-        jButtonAgregarPeli = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
+        AgrPeliculaBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("CINE");
 
-        jButtonAgregarFuncion.setText("Agregar Funcion");
-        jButtonAgregarFuncion.addActionListener(new java.awt.event.ActionListener() {
+        AgFuncionBoton.setText("Agregar Funcion");
+        AgFuncionBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarFuncionActionPerformed(evt);
+                AgFuncionBotonActionPerformed(evt);
             }
         });
 
-        jTablePeliculas.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,12 +57,12 @@ public class VistaInicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTablePeliculas);
+        jScrollPane1.setViewportView(jTable1);
 
-        jButtonAgregarPeli.setText("Agregar pelicula");
-        jButtonAgregarPeli.addActionListener(new java.awt.event.ActionListener() {
+        AgrPeliculaBoton.setText("Agregar pelicula");
+        AgrPeliculaBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarPeliActionPerformed(evt);
+                AgrPeliculaBotonActionPerformed(evt);
             }
         });
 
@@ -146,8 +78,8 @@ public class VistaInicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonAgregarFuncion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAgregarPeli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(AgFuncionBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AgrPeliculaBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(26, 26, 26)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -163,29 +95,29 @@ public class VistaInicio extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jButtonAgregarFuncion)
+                        .addComponent(AgFuncionBoton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAgregarPeli)))
+                        .addComponent(AgrPeliculaBoton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAgregarFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarFuncionActionPerformed
-        vistapeli= new VistaAgregarPelicula(); 
-        vistapeli.setVisible(true);
-    }//GEN-LAST:event_jButtonAgregarFuncionActionPerformed
-
-    private void jButtonAgregarPeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarPeliActionPerformed
-        vistaFuncion= new VistaCrearFuncion(vistapeli);
-        vistaFuncion.setVisible(true);
-    }//GEN-LAST:event_jButtonAgregarPeliActionPerformed
-
-    
-    public void mostrarPeliculas(){
+    private void AgrPeliculaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgrPeliculaBotonActionPerformed
+        vistaAgregarPelicula vstpel = new vistaAgregarPelicula();
+        vstpel.setVisible(true);
         
-    }
+        
+        
+    }//GEN-LAST:event_AgrPeliculaBotonActionPerformed
+
+    private void AgFuncionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgFuncionBotonActionPerformed
+        vistaCrearFuncion vst = new vistaCrearFuncion();
+        vst.setVisible(true);
+        
+    }//GEN-LAST:event_AgFuncionBotonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -216,24 +148,16 @@ public class VistaInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new VistaInicio().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaInicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new VistaInicio().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgregarFuncion;
-    private javax.swing.JButton jButtonAgregarPeli;
+    private javax.swing.JButton AgFuncionBoton;
+    private javax.swing.JButton AgrPeliculaBoton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTablePeliculas;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-
-    private Pelicula Pelicula(String dato, int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

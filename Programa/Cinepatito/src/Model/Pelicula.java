@@ -3,15 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Modelo;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author erofa
+ * @author Esthefany
  */
 public class Pelicula {
-
     private String nombre;
-    private int duracion;
+    private String duracion;
+    
 
-}
+    public Pelicula(String nombre, String duracion) {
+        this.nombre = nombre;
+        this.duracion = duracion;
+    }
+    
+    public Pelicula(){
+        
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+    
+    
+        
+    }
+    
+
