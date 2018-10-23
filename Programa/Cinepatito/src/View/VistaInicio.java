@@ -5,19 +5,48 @@
  */
 package View;
 
+import Model.Funcion;
 import Model.Pelicula;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Esthefany
  */
 public class VistaInicio extends javax.swing.JFrame {
-
+    DefaultTableModel modelo;
     /**
      * Creates new form VistaInicio
      */
-    public VistaInicio() {
+    public VistaInicio() throws IOException {
         initComponents();
+        cargar();
+    }
+    public void cargar() throws IOException{
+        String [] titulos = {"No.De Pelicula","Pelicula","Hora","Sala"};
+        String[] datos;
+        int contador;
+        modelo = new  DefaultTableModel(null,titulos);
+        vistaCrearFuncion funciones = new vistaCrearFuncion();
+        ArrayList<String[]> funcion= funciones.listaFunciones;
+        
+//        contador=funcion.size();
+//        System.out.println(contador);
+        datos= new String[4];
+        System.out.println(titulos.length);
+        for(int i=0;i<funcion.size();i++){
+            datos[0]=funcion.get(i)[0];
+            datos[1]=funcion.get(i)[3];
+            datos[2]=funcion.get(i)[1];
+            datos[3]=funcion.get(i)[2];
+            
+            modelo.addRow(datos);
+        }
+        jTableFunciones.setModel(modelo);
     }
 
     /**
@@ -32,8 +61,9 @@ public class VistaInicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         AgFuncionBoton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableFunciones = new javax.swing.JTable();
         AgrPeliculaBoton = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +76,7 @@ public class VistaInicio extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFunciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,15 +84,22 @@ public class VistaInicio extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Pelicula", "Pelicuka", "Hora", "Sala"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFunciones);
 
         AgrPeliculaBoton.setText("Agregar pelicula");
         AgrPeliculaBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgrPeliculaBotonActionPerformed(evt);
+            }
+        });
+
+        jButtonActualizar.setText("Actualizar Funciones");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
             }
         });
 
@@ -76,11 +113,16 @@ public class VistaInicio extends javax.swing.JFrame {
                         .addGap(178, 178, 178)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AgFuncionBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AgrPeliculaBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(AgFuncionBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(AgrPeliculaBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jButtonActualizar)))
+                        .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -92,13 +134,16 @@ public class VistaInicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(AgFuncionBoton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AgrPeliculaBoton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(AgrPeliculaBoton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar)
+                        .addGap(29, 29, 29))))
         );
 
         pack();
@@ -117,6 +162,15 @@ public class VistaInicio extends javax.swing.JFrame {
         vst.setVisible(true);
         
     }//GEN-LAST:event_AgFuncionBotonActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        try {
+            // TODO add your handling code here:
+            cargar();
+        } catch (IOException ex) {
+            Logger.getLogger(VistaInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,7 +202,11 @@ public class VistaInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaInicio().setVisible(true);
+                try {
+                    new VistaInicio().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaInicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -156,8 +214,9 @@ public class VistaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgFuncionBoton;
     private javax.swing.JButton AgrPeliculaBoton;
+    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableFunciones;
     // End of variables declaration//GEN-END:variables
 }

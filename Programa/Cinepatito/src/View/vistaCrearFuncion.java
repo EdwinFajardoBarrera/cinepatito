@@ -7,6 +7,7 @@ package View;
 
 import Model.Funcion;
 import Model.Pelicula;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.JTextField;
 public class vistaCrearFuncion extends javax.swing.JFrame {
     vistaAgregarPelicula vstpel= new vistaAgregarPelicula();
     public Funcion funcion;
+    static ArrayList<String[]> listaFunciones = new ArrayList<String[]>();
     
     /**
      * Creates new form vistaCrearFuncion
@@ -33,17 +35,6 @@ public class vistaCrearFuncion extends javax.swing.JFrame {
      
       
     }
-    
-   public void cargaPeliculas(){
-       
-   }
-    
-    
-    
-    
-    
-    
-
 
     public JButton getjButtonAbrirFuncion() {
         return jButtonAbrirFuncion;
@@ -205,17 +196,20 @@ public class vistaCrearFuncion extends javax.swing.JFrame {
 
     private void jButtonAbrirFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirFuncionActionPerformed
         funcion= new Funcion();
+        String funciones[]= new String[4];
         funcion.setIdFuncion(Integer.parseInt(jTextFieldIdFuncion.getText()));
         funcion.setHora(jTextFieldHora.getText());
         funcion.setSala(jComboBoxSala.getSelectedIndex()+1);
+        funciones[0] = jTextFieldIdFuncion.getText();
+        funciones[1]= jTextFieldHora.getText();
+        funciones[2]= String.valueOf(jComboBoxSala.getSelectedIndex()+1);
+        funciones[3]= jComboBox1.getSelectedItem().toString();
+        
+        System.out.println(funciones[0]+funciones[1]+funciones[2]+funciones[3]);
         
         
-        
-        
-        System.out.println(funcion.getHora()+funcion.getIdFuncion()+" "+funcion.getSala());
-        
-        
-        
+        listaFunciones.add(funciones);
+
     }//GEN-LAST:event_jButtonAbrirFuncionActionPerformed
 
     private void jComboBoxSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSalaActionPerformed

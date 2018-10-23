@@ -125,32 +125,13 @@ static ArrayList<String> ArrayPels= new ArrayList<String>();
     private void jButtonAgregarPeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarPeliActionPerformed
         // TODO add your handling code here:
          Pelicula pel = new Pelicula();
-         
         pel.setNombre(jTextFieldNombre.getText());
         System.out.println(pel.getNombre());
          pel.setDuracion(jTextFieldDuracion.getText());
          System.out.println(pel.getDuracion());
-         
          ArrayPels.add(pel.getNombre());
-        
-         
-         
-         
     }//GEN-LAST:event_jButtonAgregarPeliActionPerformed
 
-    public void guardarTxt() throws IOException{
-        FileWriter writer = new FileWriter("output.txt"); 
-for(String str: ArrayPels) {
-            try {
-                writer.write(str);
-            } catch (IOException ex) {
-                //Logger.getLogger(vistaAgregarPelicula.class.getName()).log(Level.SEVERE, null, ex);
-            }
-}
-            writer.close();
-    }
-  
-    
     
     private void jTextFieldDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDuracionActionPerformed
         // TODO add your handling code here:
